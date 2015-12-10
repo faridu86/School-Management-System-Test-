@@ -32,24 +32,39 @@ module.exports = function(sequelize, DataTypes) {
             var _this = this;
             var signature = null;
             return new Promise.bind(this)
-                .then( function(user){
+                .then( function(){
                     UserRequestSignatures = global.db.UserRequestSignatures;
-                    console.log("user::::", moment().unix());
-                    return UserRequestSignatures.find() //{ where: [ "fk_user_id = ? AND v_request LIKE ? AND i_expiry > ? ", user.id, "PasswordReset", moment().unix()  ] })
-                            .then( function( existingSignature){
-                                if(existingSignature){
-                                    console.log("found signature:::");
-                                    return existingSignature.v_signature;
-                                }else{
-                                    console.log("can not found signature:::");
-                                    var puid = new Puid(true);
-                                    signature = puid.generate();
-                                    return ;
-                                }
-                            });
+                    
+                    var puid = new Puid(true);
+                    signature = puid.generate();
+
+                    var newSignature = {
+                            fk_user_id: _this.id,
+                            v_request: "PasswordReset",
+                            v_signature: signature,
+                            i_created: moment().unix(),
+                            i_expiry: moment().add(3, 'days').unix()
+                        };
+
+                    return UserRequestSignatures.findOrCreate( { where: [ " fk_user_id = ? AND v_request LIKE ? AND i_expiry > ? AND i_completed is null ", _this.id, "PasswordReset", moment().unix() ], defaults: newSignature })
+                        .then( function( signatureRow, created){
+
+                            console.log("created::::", created);
+                            console.log("signature:::", signature);
+                            console.log("signatureRow.v_signature:::", signatureRow.v_signature );
+                            //console.log("signatureRow:::", signatureRow);
+
+                            if(signature == signatureRow.v_signature){
+                                console.log("new signature");
+                            }else{
+                                console.log("existing signature");
+                            }
+                            
+                            return signatureRow;
+                        });
                 })
                 .then( function( signature){
-                    console.log("signature::::",signature);
+                    console.log("signature::::",signature.v_signature);
                     return true;
                 })
                 .catch( function(err){

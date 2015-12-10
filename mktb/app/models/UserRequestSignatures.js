@@ -8,6 +8,7 @@ module.exports = function(sequelize, DataTypes) {
         v_request: DataTypes.STRING,
         v_signature: DataTypes.STRING,
         i_created: DataTypes.INTEGER,
+        i_expiry: {type: DataTypes.INTEGER, allowNull: true},
         i_completed: {type: DataTypes.INTEGER, allowNull: true}
     };
 

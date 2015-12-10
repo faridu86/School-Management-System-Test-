@@ -1,3 +1,7 @@
+var Promise = require('bluebird'),
+    Puid    = require('puid'),
+    moment  = require('moment');
+
 module.exports = function(sequelize, DataTypes) {
 
     var tableName = "users";
@@ -23,6 +27,34 @@ module.exports = function(sequelize, DataTypes) {
         changePassword: function( password){
             this.v_password = password;
             return this.save();
+        },
+        saveResetPasswordEmail: function(render){
+            var _this = this;
+            var signature = null;
+            return new Promise.bind(this)
+                .then( function(user){
+                    UserRequestSignatures = global.db.UserRequestSignatures;
+                    console.log("user::::", moment().unix());
+                    return UserRequestSignatures.find() //{ where: [ "fk_user_id = ? AND v_request LIKE ? AND i_expiry > ? ", user.id, "PasswordReset", moment().unix()  ] })
+                            .then( function( existingSignature){
+                                if(existingSignature){
+                                    console.log("found signature:::");
+                                    return existingSignature.v_signature;
+                                }else{
+                                    console.log("can not found signature:::");
+                                    var puid = new Puid(true);
+                                    signature = puid.generate();
+                                    return ;
+                                }
+                            });
+                })
+                .then( function( signature){
+                    console.log("signature::::",signature);
+                    return true;
+                })
+                .catch( function(err){
+                    return null;
+                });
         }
     };
 

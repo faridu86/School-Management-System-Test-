@@ -37,6 +37,7 @@
     "mysql": "^2.0.0",
     "path-extra": "^1.0.2",
     "path-match": "^1.2.0",
+    "puid": "^1.0.5",
     "randomstring": "^1.0.3",
     "request": "2.40.0",
     "require-directory": "^2.0.0",

@@ -76,7 +76,39 @@ exports.changePassword = function(req, res){
 }
 
 exports.forgotPassword = function(req, res){
-	res.render("home/forgot-password", { layout: "home/layout" });
+	if(!req.body.email){
+		res.render("home/forgot-password");
+	}else{
+
+		var User = global.db.User;
+
+		User.find({where:{v_email:req.body.email}})
+			.then( function(user){
+				if(user){
+					user.saveResetPasswordEmail(res.render)
+					.then( function( signatuer){
+						if(signatuer){
+							res.send("email sent")	
+						}else{
+							res.send("email can't sent")
+						}
+						
+					})
+					// res.send("email sent")
+				}else{
+					res.send("wrong email entered")
+				}
+			})
+			.catch( function(err){
+				console.log(err);
+				res.send("wrong email")
+			});
+		// res.render("email-templates/password/forgot-password", {layout:"email-templates/password/layout"}, function( err, html){
+		// 	console.log("html:::", html);
+		// 	res.send("email sent.");
+		// })	
+	}
+	
 }
 
 exports.resetPasswordEmail = function(req, res){

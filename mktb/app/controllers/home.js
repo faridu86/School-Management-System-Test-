@@ -1,7 +1,8 @@
 
-var Sequelize = require('sequelize')
-	, moment = require('moment')
-	, authentication = require( global.config.root + '/modules/authentication');
+var sequelize			= require('sequelize')
+	, moment			= require('moment')
+	, Promise			= require('moment')
+	, authentication 	= require( global.config.root + '/modules/authentication');
 
 exports.index = function ( req, res){
 	res.render("home/index", { layout: "home/layout" }); 
@@ -58,7 +59,6 @@ exports.changePassword = function(req, res){
 				
 				user.changePassword( req.body.new_password)
 				.then( function(){
-					console.log("password changed.")
 					var successMessages = {};
 					successMessages.passwordChanged = true;
 					res.render("home/change-password", { successMessages: successMessages, layout: "home/layout" });
@@ -86,8 +86,8 @@ exports.forgotPassword = function(req, res){
 			.then( function(user){
 				if(user){
 					user.saveResetPasswordEmail(res.render)
-					.then( function( signatuer){
-						if(signatuer){
+					.then( function( signature){
+						if(signature){
 							var messages = {
 								success: "Password reset instrunction has been sent to you in email. Please check your inbox in a short while. Thanks."
 							};
@@ -113,14 +113,63 @@ exports.forgotPassword = function(req, res){
 	
 }
 
-exports.resetPasswordView = function(req, res){
-	if(!req.body.password){
-		res.render("home/reset-password", { layout: "home/layout" });
-	}else{
-		
-	}
+exports.resetPassword = function(req, res){
+	
+	var signature = req.params.signature;
+	var UserRequestSignatures = global.db.UserRequestSignatures;
+	var User = global.db.User;
+	var messages = {};
+	var vSignatureRow = {};
+
+	UserRequestSignatures.find( { where: [ " v_signature = ? AND v_request LIKE ? AND i_expiry > ? AND i_completed is null ", signature, "PasswordReset", moment().unix() ] })
+		.then( function( signatureRow){
+			signatureRow = Array.isArray(signatureRow) ? signatureRow[0] : signatureRow;
+
+			if(!signatureRow || !signatureRow.v_signature){
+				messages.inCorrectSignature = "Your password reset link is either incorrect or expired. You can get new one by following forgot password.";
+				throw "inCorrectSignature";
+			}
+			vSignatureRow = signatureRow;
+			return signatureRow;
+		})
+		.then( function(signatureRow){
+			if(!req.body.password || req.body.password == req.body.confirm_password){
+				return signatureRow;
+			}else if( req.body.password != req.body.confirm_password){
+				messages.passwordsNotMatching = "Your passwords do not match.";
+				throw "passwordsNotMatching";
+			}
+		})
+		.then( function(signatureRow){
+			if(!!messages.inCorrectSignature || !!messages.passwordsNotMatching){
+				return false;
+			}else{
+				return User.find({where:{ id: signatureRow.fk_user_id}});
+			}
+		})
+		.then( function(user){
+			if(!user){
+				throw "UserNotFound";
+			}else{
+				return user.changePassword( req.body.password);
+			}
+		})
+		.then( function(isReset){
+			if(isReset){
+				messages.resetPassword = "Your password has been reset successfully. Login now. "
+				vSignatureRow.i_completed = moment().unix();
+				return vSignatureRow.save();
+			}else{
+				throw "Cannot reset password";
+			}
+		})
+		.then( function(){
+			res.render("home/reset-password", { signature: signature, messages: messages})
+		})
+		.catch( function( err){
+			console.log("error thrown:::", err);
+			res.render("home/reset-password", { signature: signature, messages: messages})
+		});
+
 }
 
-exports.resetPassword = function(req, res){
-	res.render("home/reset-password", { layout: "home/layout" });
-}

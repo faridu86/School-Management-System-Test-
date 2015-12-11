@@ -1,5 +1,5 @@
-var path = require('path')
-	, home = require('../app/controllers/home');
+var path 	= require('path')
+	, home 	= require('../app/controllers/home');
 
 require('../app/models');
 
@@ -18,7 +18,7 @@ module.exports = function (app) {
 	app.post("/forgot-password", home.forgotPassword);
 
 	app.get("/reset-password/:signature", home.resetPassword);
-	app.post("/reset-password:signature", home.resetPassword);
+	app.post("/reset-password/:signature", home.resetPassword);
 
 }
 

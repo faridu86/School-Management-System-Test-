@@ -30,8 +30,8 @@ module.exports = function(sequelize, DataTypes) {
         },
         saveResetPasswordEmail: function(render){
             var _this = this;
-            UserRequestSignatures = global.db.UserRequestSignatures;
-            EmailNotifications = global.db.EmailNotifications;
+            var UserRequestSignatures = global.db.UserRequestSignatures;
+            var EmailNotifications = global.db.EmailNotifications;
 
             return new Promise.bind(this)
                 .then( function(){

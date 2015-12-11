@@ -113,12 +113,12 @@ exports.forgotPassword = function(req, res){
 	
 }
 
-exports.resetPasswordEmail = function(req, res){
-	res.render("home/forgot-password", { layout: "home/layout" });
-}
-
 exports.resetPasswordView = function(req, res){
-	res.render("home/reset-password", { layout: "home/layout" });
+	if(!req.body.password){
+		res.render("home/reset-password", { layout: "home/layout" });
+	}else{
+		
+	}
 }
 
 exports.resetPassword = function(req, res){

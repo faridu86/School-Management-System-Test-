@@ -7,6 +7,7 @@ module.exports = function (app) {
 
 	app.get("/", home.index);
 	app.get("/dashboard", home.dashboard);
+	
 	app.post("/login", home.login);
 	app.get("/logout", home.logout);
 
@@ -15,7 +16,8 @@ module.exports = function (app) {
 
 	app.get("/forgot-password", home.forgotPassword);
 	app.post("/forgot-password", home.forgotPassword);
-	app.get("/reset-password/:signature", home.resetPasswordView);
+
+	app.get("/reset-password/:signature", home.resetPassword);
 	app.post("/reset-password:signature", home.resetPassword);
 
 }

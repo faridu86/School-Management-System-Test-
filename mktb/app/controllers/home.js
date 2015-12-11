@@ -88,7 +88,10 @@ exports.forgotPassword = function(req, res){
 					user.saveResetPasswordEmail(res.render)
 					.then( function( signatuer){
 						if(signatuer){
-							res.send("email sent")	
+							var messages = {
+								success: "Password reset instrunction has been sent to you in email. Please check your inbox in a short while. Thanks."
+							};
+							res.render("home/forgot-password", { messages: messages});
 						}else{
 							res.send("email can't sent")
 						}
@@ -96,17 +99,16 @@ exports.forgotPassword = function(req, res){
 					})
 					// res.send("email sent")
 				}else{
-					res.send("wrong email entered")
+					var messages = {
+						noEmail: "Email does not exist in our database. Please enter correct email."
+					};
+					res.render("home/forgot-password", { messages: messages});
 				}
 			})
 			.catch( function(err){
 				console.log(err);
 				res.send("wrong email")
 			});
-		// res.render("email-templates/password/forgot-password", {layout:"email-templates/password/layout"}, function( err, html){
-		// 	console.log("html:::", html);
-		// 	res.send("email sent.");
-		// })	
 	}
 	
 }

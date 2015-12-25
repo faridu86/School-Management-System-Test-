@@ -1,6 +1,7 @@
 var RSVP = require("rsvp")
-    , moment = require("moment")
-    , Promise = require("bluebird");
+    , moment    = require("moment")
+    , Puid      = require('puid')
+    , Promise   = require("bluebird");
 
 exports.isLoggedIn = function (options) {
 	
@@ -13,7 +14,10 @@ exports.loginUser = function( req) {
     return User.find({where: { v_username: req.body.username, v_password: req.body.password }})
     .then( function( user){
         if(user){
-            req.session.api_key = ''+user.id;
+
+            var puid = new Puid();
+            
+            req.session.api_key = puid.generate();
             user.v_api_key = req.session.api_key;
         
             return user.save()

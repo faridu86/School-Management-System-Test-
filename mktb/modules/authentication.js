@@ -3,8 +3,17 @@ var RSVP = require("rsvp")
     , Puid      = require('puid')
     , Promise   = require("bluebird");
 
-exports.isLoggedIn = function (options) {
-	
+exports.isLoggedIn = function ( options, callback) {
+	var User = global.db.User;
+
+    User.find( { where: { v_api_key: options.api_key} })
+        .then( function(user){
+            if(!!user && !!user.id){
+                typeof callback === 'function' && callback(user);
+            }else{
+                typeof callback === 'function' && callback(null);
+            }
+        });
 };
 
 exports.loginUser = function( req) {

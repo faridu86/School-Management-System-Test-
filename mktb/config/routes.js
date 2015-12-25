@@ -1,12 +1,13 @@
-var path 	= require('path')
-	, home 	= require('../app/controllers/home');
+var path						= require('path')
+	, home						= require('../app/controllers/home')
+	, requireAuthentication		= require('../middleware/requireAuthentication');
 
 require('../app/models');
 
 module.exports = function (app) {
 
 	app.get("/", home.index);
-	app.get("/dashboard", home.dashboard);
+	app.get("/dashboard", requireAuthentication, home.dashboard);
 	
 	app.post("/login", home.login);
 	app.get("/logout", home.logout);

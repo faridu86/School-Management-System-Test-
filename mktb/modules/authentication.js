@@ -16,7 +16,7 @@ exports.isLoggedIn = function ( options, callback) {
         });
 };
 
-exports.loginUser = function( req) {
+exports.loginUser = function( req, res) {
 	
 	var User = global.db.User;
 
@@ -28,7 +28,11 @@ exports.loginUser = function( req) {
             
             req.session.api_key = puid.generate();
             user.v_api_key = req.session.api_key;
-        
+
+            res.cookie('mktb_api_key', user.v_api_key, { expires: new Date(Date.now() + 900000), httpOnly: true });
+
+            console.log("req.cookies.mktb_api_key", req.cookies.mktb_api_key, { path: global.config.domainForCookie});
+
             return user.save()
             .then(function(){
 
@@ -51,7 +55,7 @@ exports.loginUser = function( req) {
 
 };
 
-exports.logoutUser = function( req) {
+exports.logoutUser = function( req, res) {
     var User = global.db.User;
 
     var api_key = req.session.api_key;
@@ -60,6 +64,7 @@ exports.logoutUser = function( req) {
         .then( function(user){
             if( user){
                 req.session.destroy();
+                res.clearCookie("mktb_api_key", { path: global.config.domainForCookie});
                 user.v_api_key = null;
                 return user.save();
             }else{

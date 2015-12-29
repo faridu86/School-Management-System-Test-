@@ -9,6 +9,7 @@ exports.index = function ( req, res){
 }
 
 exports.dashboard = function( req, res){
+
 	res.send("welcome to the dashboard:::" + req.session.api_key);
 }
 
@@ -16,7 +17,7 @@ exports.login = function(req, res){
 
 	if( req.body.username && req.body.username.trim() && req.body.password && req.body.password.trim() ){
 
-		authentication.loginUser(req)
+		authentication.loginUser(req , res)
 		.then( function(theUser){
 			res.redirect("/dashboard");
 		})
@@ -30,7 +31,7 @@ exports.login = function(req, res){
 }
 
 exports.logout = function(req, res){
-	authentication.logoutUser(req)
+	authentication.logoutUser( req, res)
 	.then( function(theUser){
 		res.redirect("/");
 	})

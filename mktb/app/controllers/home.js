@@ -9,11 +9,7 @@ exports.index = function ( req, res){
 }
 
 exports.dashboard = function( req, res){
-	if( req.session.api_key){
-		res.send("welcome to the dashboard:::" + req.session.api_key);
-	}else{
-		res.send("Please login");
-	}
+	res.send("welcome to the dashboard:::" + req.session.api_key);
 }
 
 exports.login = function(req, res){

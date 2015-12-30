@@ -4,9 +4,9 @@ userContext = require(global.config.root + "/modules/userContext"),
 module.exports = function(req, res, next){
 
 	userContext.getUserContext(req.user)
-	.then(function(facilities){
+	.then(function(institutions){
 
-        req.userContext = facilities;
+        req.userContext = institutions;
 
         next();
 

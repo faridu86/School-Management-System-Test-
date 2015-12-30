@@ -9,8 +9,9 @@ exports.index = function ( req, res){
 }
 
 exports.dashboard = function( req, res){
-
-	res.send("welcome to the dashboard:::" + req.session.api_key);
+	var api_key = req.session.api_key?req.session.api_key: req.cookies.mktb_api_key;
+	
+	res.render("home/dashboard", { userContext: req.userContext});
 }
 
 exports.login = function(req, res){

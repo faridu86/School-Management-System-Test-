@@ -9,15 +9,29 @@ exports.getUserContext = function(user){
 		var userInstitutionWebapps = {};
 		var userInstitutionPermissions = {};
 
-		console.log("hello context");
+		global.db.UserInstitutions.getUserInstitutions(user)
+		.then( function(institutions){
+			userInstitutions = _.uniq( _.map( institutions, function(institution){
+				return institution.institution;
+			}) , "id" );
 
-		global.db.Institutions.findAll(function( institutions){
-			console.log("institutions:::", institutions);
-			return institutions;
-		});
+			_.forEach( userInstitutions, function( institution, key){
+				
+				var institutionId = institution.id;
 
-		console.log("hello context 2");
+				roles = _.filter( _.uniq( _.map( institutions, function (institution) {
+					if( institutionId == institution.fk_institution_id)
+						return institution.role;
+				}) , "id"), function( institution){ return institution != null} );
+
+				institution.setDataValue("roles", roles);
+			});
+
+			return userInstitutions;
+		})
+		.then( function( institutions){
+			resolve( institutions);
+		})
 		
-		resolve( true);
 	});
 }

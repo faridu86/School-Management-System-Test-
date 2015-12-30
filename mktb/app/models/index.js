@@ -20,4 +20,10 @@ global.db = models = {
 	UserLogins: sequelize.import(__dirname + '/UserLogins'),
 	UserPasswords: sequelize.import(__dirname + '/UserPasswords'),
 	UserRequestSignatures: sequelize.import(__dirname + '/UserRequestSignatures'),
-}
+};
+
+models.Institutions.hasMany( models.UserInstitutions, { foreignKey: 'fk_institution_id'});
+models.UserInstitutions.belongsTo( models.Institutions, { foreignKey: 'fk_institution_id'});
+
+models.Roles.hasMany( models.UserInstitutions, { foreignKey: 'fk_role_id'});
+models.UserInstitutions.belongsTo( models.Roles, { foreignKey: 'fk_role_id'});

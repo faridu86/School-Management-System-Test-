@@ -1,7 +1,8 @@
 var path						= require('path')
 	, home						= require('../app/controllers/home')
 	, requireAuthentication		= require('../middleware/requireAuthentication')
-	, loadUserContext			= require('../middleware/loadUserContext');
+	, loadUserContext			= require('../middleware/loadUserContext')
+	, routers 					= require(path.join(global.config.root, 'app/routers'));
 
 require('../app/models');
 
@@ -21,6 +22,8 @@ module.exports = function (app) {
 
 	app.get("/reset-password/:signature", home.resetPassword);
 	app.post("/reset-password/:signature", home.resetPassword);
+
+	app.use("/dashboard/academic", requireAuthentication, loadUserContext, routers.academic)
 
 }
 

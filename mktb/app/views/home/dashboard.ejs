@@ -1,1 +1,10 @@
-<%= JSON.stringify( userContext) %>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3 transparent-bg">
+      <h1>Institutions</h1>
+
+      <% for (var i = 0 ; i < userContext.length ; i++) { %>
+      	<a href="/dashboard/academic/institutions/<%=userContext[i].id%>" class="btn btn-default"><%=userContext[i].v_name%></a>
+      <% }; %>
+
+  </div>
+</div>

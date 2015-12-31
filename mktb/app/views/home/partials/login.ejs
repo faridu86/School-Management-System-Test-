@@ -2,6 +2,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <% if(!!locals.currentUser){ %>
+            <li><p class="navbar-text">Hello <b><%= locals.currentUser.v_first_name %></b></p></li>
             <li><a href="/logout"><b>Logout</b> </a></li>
             <% }else{ %>
             <li><p class="navbar-text">Already have an account?</p></li>

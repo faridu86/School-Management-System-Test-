@@ -1,25 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="mktbAcadamic">
+<html lang="en" ng-app="mktb">
 	<head>
 		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>School System</title>
-	    
 
-		<script src="http://code.angularjs.org/snapshot/angular.js"></script>
-
-		<script>
-			angular.module('mktbAcadamic', [])
-			.controller('MyController', ['$scope', function ($scope) {
-				$scope.greetMe = 'World';
-			}]);
-
-			angular.element(document).ready(function() {
-				angular.bootstrap(document, ['mktbAcadamic']);
-			});
-		</script>
-
+		<script type="text/javascript" src="/public/components/angular/angular.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/public/components/angular-ui-router/release/angular-ui-router.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/public/js/acadamic/main.es6" charset="UTF-8"></script>
 
 	</head>
 <body>
@@ -28,6 +17,6 @@
     
     <%- body %>
 
-  
+
 </body>
 </html>

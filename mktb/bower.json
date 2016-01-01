@@ -7,6 +7,10 @@
     "components"
   ],
   "dependencies": {
+    "angular": "1.4.x",
+    "angular-ui-bootstrap": "*",
+    "angular-ui-router": "0.2.14",
+    "lodash": "*",
     "jquery": "1.11.3",
     "bootstrap": "~3.3.5",
     "zebra-datepicker": "~1.8.8",

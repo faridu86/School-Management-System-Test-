@@ -1,11 +1,9 @@
 'use strict';
 
+
 class MktbApp {
     constructor() {
-        angular.module('mktb', [])
-            .controller('MyController', ['$scope', function ($scope) {
-                $scope.greetMe = 'World';
-            }]);
+        angular.module('mktb', ['ui.router', 'ui.bootstrap']);
     }
 }
 

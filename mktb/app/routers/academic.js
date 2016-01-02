@@ -17,4 +17,7 @@ subApp.use(function (req, res, next) {
 
 subApp.get("/institutions/:institution_id", controllers.academic.dashboard.index);
 
+subApp.get("/institutions/:institution_id/students", controllers.academic.students.index);
+subApp.get("/institutions/:institution_id/students/:student_id", controllers.academic.students.student);
+
 module.exports = subApp;

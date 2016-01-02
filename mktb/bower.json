@@ -9,6 +9,7 @@
   "dependencies": {
     "angular": "1.4.x",
     "angular-bootstrap": "*",
+    "angular-route": "~1.5.0",
     "angular-ui-router": "0.2.14",
     "lodash": "*",
     "jquery": "1.11.3",

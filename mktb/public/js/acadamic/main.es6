@@ -25,12 +25,18 @@ mktbApp.service('studentService', [ '$http', function( $http){
                 console.log(result);
             })
             .error( function( data, status){
-
+                console.log(data, status);
             })
     };
 
     this.getStudent = function(id){
-        console.log("getting student detail");
+        $http.get("/dashboard/academic/institutions/1/students/2")
+            .success( function( result){
+                console.log(result);
+            })
+            .error( function( data, status){
+                console.log(data, status);
+            })
     };
 
     this.addStudent = function( options){
@@ -43,7 +49,6 @@ mktbApp.service('studentService', [ '$http', function( $http){
 }]);
 
 mktbApp.controller("studentListing", ['$scope', 'studentService', function($scope, studentService){
-    console.log("studentListing" );
     studentService.getStudents()
 }]);
 

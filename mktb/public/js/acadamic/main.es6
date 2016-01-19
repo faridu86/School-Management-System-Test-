@@ -13,6 +13,27 @@ mktbApp.config( function($routeProvider){
         templateUrl: "/public/js/acadamic/templates/student.details.html",
         controller: 'studentDetails'
     })
+
+    .when("/dashboard/academic/institutions/courses", {
+        templateUrl: "/public/js/acadamic/templates/courseConfig/courses.html",
+        controller: "institutionCourses"
+    })
+
+    .when("/dashboard/academic/institutions/courseSemesters", {
+        templateUrl: "/public/js/acadamic/templates/courseConfig/course.semesters.html",
+        controller: "courseSemesters"
+    })
+
+    .when("/dashboard/academic/institutions/subjects", {
+        templateUrl: "/public/js/acadamic/templates/courseConfig/subjects.html",
+        controller: "institutionSubjects"
+    })
+
+    .when("/dashboard/academic/institutions/semesterSubjects", {
+        templateUrl: "/public/js/acadamic/templates/courseConfig/semester.subjects.html",
+        controller: "semesterSubjects"
+    })
+
 });
 
 mktbApp.service('studentService', [ '$http', function( $http){
@@ -48,10 +69,79 @@ mktbApp.service('studentService', [ '$http', function( $http){
     };
 }]);
 
-mktbApp.controller("studentListing", ['$scope', 'studentService', function($scope, studentService){
+mktbApp.service("courseConfig", ['$http', function( $http){
+    var self = this;
+
+    this.courses = function(){
+
+    };
+
+    this.addCourse = function(){
+
+    };
+
+    this.deleteCourse = function(){
+
+    };
+
+    this.subjects = function(){
+
+    };
+
+    this.addSubject = function(){
+
+    };
+
+    this.deleteSubject = function(){
+
+    };
+
+    this.semesters = function(){
+
+    };
+
+    this.addSemester = function(){
+
+    };
+
+    this.deleteSemester = function(){
+
+    };
+
+    this.semesterSubjcts = function(){
+
+    };
+
+    this.addSubjectToSemester = function(){
+
+    };
+
+    this.removeSubjectFromSemester = function(){
+
+    };
+
+}]);
+
+mktbApp.controller("studentListing", ['$scope', 'studentService', function( $scope, studentService){
     studentService.getStudents()
 }]);
 
-mktbApp.controller("studentDetails", ['$scope', '$routeParams', function($scope, $routeParams){
+mktbApp.controller("studentDetails", ['$scope', '$routeParams', function( $scope, $routeParams){
     console.log("studentDetails", $routeParams);
+}]);
+
+mktbApp.controller( "institutionCourses", ['$scope', function( $scope){
+
+}]);
+
+mktbApp.controller( "courseSemesters", ['$scope', function( $scope){
+
+}]);
+
+mktbApp.controller( "institutionSubjects", ['$scope', function( $scope){
+
+}]);
+
+mktbApp.controller( "semesterSubjects", ['$scope', function( $scope){
+
 }]);

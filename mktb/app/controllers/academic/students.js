@@ -9,7 +9,7 @@ exports.index = function( req, res){
     });
 }
 
-exports.index = function( req, res){
+exports.student = function( req, res){
     res.format({
         json: function() {
             res.status(200).send({name: "farid", address: "peshawar"} );
@@ -17,10 +17,3 @@ exports.index = function( req, res){
     });
 }
 
-exports.student = function( req, res){
-    res.format({
-        json: function() {
-            res.status(200).send({ name: "farid"});
-        }
-    });
-}

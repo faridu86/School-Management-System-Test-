@@ -49,7 +49,7 @@ exports.deleteSubject = function( req, res){
     });
 }
 
-exports.Batches = function( req, res){
+exports.batches = function( req, res){
     res.format({
         json: function() {
             res.status(200).send({ name: "batches"});

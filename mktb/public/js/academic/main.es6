@@ -5,32 +5,37 @@ var mktbApp = angular.module('mktb', [ 'ngRoute']);
 mktbApp.config( function($routeProvider){
     $routeProvider
     .when("/students", {
-        templateUrl: "/public/js/acadamic/templates/student.listing.html",
+        templateUrl: "/public/js/academic/templates/student.listing.html",
         controller: 'studentListing'
     })
 
     .when("/students/:student_id", {
-        templateUrl: "/public/js/acadamic/templates/student.details.html",
+        templateUrl: "/public/js/academic/templates/student.details.html",
         controller: 'studentDetails'
     })
 
+    .when("/dashboard/academic/configuration", {
+        templateUrl: "/public/js/academic/templates/configuration/configuration.main.html",
+        controller: 'academicConfiguration'
+    })
+
     .when("/dashboard/academic/institutions/courses", {
-        templateUrl: "/public/js/acadamic/templates/courseConfig/courses.html",
+        templateUrl: "/public/js/academic/templates/courseConfig/courses.html",
         controller: "institutionCourses"
     })
 
     .when("/dashboard/academic/institutions/courseSemesters", {
-        templateUrl: "/public/js/acadamic/templates/courseConfig/course.semesters.html",
+        templateUrl: "/public/js/academic/templates/courseConfig/course.semesters.html",
         controller: "courseSemesters"
     })
 
     .when("/dashboard/academic/institutions/subjects", {
-        templateUrl: "/public/js/acadamic/templates/courseConfig/subjects.html",
+        templateUrl: "/public/js/academic/templates/courseConfig/subjects.html",
         controller: "institutionSubjects"
     })
 
     .when("/dashboard/academic/institutions/semesterSubjects", {
-        templateUrl: "/public/js/acadamic/templates/courseConfig/semester.subjects.html",
+        templateUrl: "/public/js/academic/templates/courseConfig/semester.subjects.html",
         controller: "semesterSubjects"
     })
 
@@ -128,6 +133,10 @@ mktbApp.controller("studentListing", ['$scope', 'studentService', function( $sco
 
 mktbApp.controller("studentDetails", ['$scope', '$routeParams', function( $scope, $routeParams){
     console.log("studentDetails", $routeParams);
+}]);
+
+mktbApp.controller("academicConfiguration", ['$scope', '$routeParams', function( $scope, $routeParams){
+    console.log("academicConfiguration", $routeParams);
 }]);
 
 mktbApp.controller( "institutionCourses", ['$scope', function( $scope){

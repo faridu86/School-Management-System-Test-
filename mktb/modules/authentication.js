@@ -17,15 +17,11 @@ exports.isLoggedIn = function ( options, callback) {
 };
 
 exports.loginUser = function( req, res) {
-	
 	var User = global.db.User;
-
     return User.find({where: { v_username: req.body.username, v_password: req.body.password }})
     .then( function( user){
         if(user){
-
             var puid = new Puid();
-            
             req.session.api_key = puid.generate();
             user.v_api_key = req.session.api_key;
 
@@ -40,9 +36,9 @@ exports.loginUser = function( req, res) {
                 return UserLogins.create({
                     'fk_user_id': user.id,
                     'v_ip': req.connection.remoteAddress,
-                    'i_date': moment().unix(),
+                    'created_at': moment().unix(),
+                    'updated_at': moment().unix(),
                     'v_api_key': user.v_api_key
-
                 });
             });
         }else{

@@ -14,7 +14,16 @@ module.exports = function(sequelize, DataTypes) {
         v_first_name: DataTypes.STRING,
         v_last_name: DataTypes.STRING,
         v_api_key: DataTypes.STRING,
-        i_add_date: DataTypes.INTEGER
+        v_gender: DataTypes.STRING,
+        v_nationality: DataTypes.STRING,
+        v_nic_number: DataTypes.STRING,
+        v_city: DataTypes.STRING,
+        v_state: DataTypes.STRING,
+        v_country: DataTypes.STRING,
+        v_mobile: DataTypes.STRING,
+        dob: DataTypes.INTEGER,
+        created_at: DataTypes.INTEGER,
+        updated_at: DataTypes.INTEGER,
     };
 
     var instanceMethods = {

@@ -17,7 +17,6 @@ exports.dashboard = function( req, res){
 exports.login = function(req, res){
 
 	if( req.body.username && req.body.username.trim() && req.body.password && req.body.password.trim() ){
-
 		authentication.loginUser(req , res)
 		.then( function(theUser){
 			res.redirect("/dashboard");

@@ -3,17 +3,13 @@ var RSVP = require("rsvp")
     , Puid      = require('puid')
     , Promise   = require("bluebird");
 
-exports.isLoggedIn = function ( options, callback) {
-	var User = global.db.User;
-
-    User.find( { where: { v_api_key: options.api_key} })
-        .then( function(user){
-            if(!!user && !!user.id){
-                typeof callback === 'function' && callback(user);
-            }else{
-                typeof callback === 'function' && callback(null);
-            }
-        });
+exports.isLoggedIn = function ( apiKey) {
+	return global.db.User.find( { 
+        where: { v_api_key: apiKey} 
+    })
+    .then( function(user){
+        return user;
+    });
 };
 
 exports.loginUser = function( req, res) {
@@ -24,21 +20,18 @@ exports.loginUser = function( req, res) {
             var puid = new Puid();
             req.session.api_key = puid.generate();
             user.v_api_key = req.session.api_key;
-
             res.cookie('mktb_api_key', user.v_api_key, { expires: new Date(Date.now() + 900000), httpOnly: true });
-
-            console.log("req.cookies.mktb_api_key", req.cookies.mktb_api_key, { path: global.config.domainForCookie});
-
+            
             return user.save()
             .then(function(){
-
-                var UserLogins = global.db.UserLogins;
-                return UserLogins.create({
+                return global.db.UserLogins.create({
                     'fk_user_id': user.id,
                     'v_ip': req.connection.remoteAddress,
                     'created_at': moment().unix(),
                     'updated_at': moment().unix(),
                     'v_api_key': user.v_api_key
+                }).then( function() {
+                    return user;
                 });
             });
         }else{

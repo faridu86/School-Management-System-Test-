@@ -5,29 +5,25 @@ exports.getUserContext = function(user){
 
 	return new Promise( function( resolve, reject){
 
-		var userInstitutions = {};
+		var institutionUsers = {};
 		var userInstitutionWebapps = {};
 		var userInstitutionPermissions = {};
 
-		global.db.UserInstitutions.getUserInstitutions(user)
+		global.db.InstitutionUsers.getUserInstitutions(user)
 		.then( function(institutions){
-			userInstitutions = _.uniq( _.map( institutions, function(institution){
+			institutionUsers = _.uniq( _.map( institutions, function(institution){
 				return institution.institution;
-			}) , "id" );
-
-			_.forEach( userInstitutions, function( institution, key){
-				
+			}), "id");
+			_.forEach( institutionUsers, function( institution){
 				var institutionId = institution.id;
-
-				roles = _.filter( _.uniq( _.map( institutions, function (institution) {
-					if( institutionId == institution.fk_institution_id)
-						return institution.role;
-				}) , "id"), function( institution){ return institution != null} );
-
-				institution.setDataValue("roles", roles);
+				roles = _.map( _.filter( institutions, function( i){
+					return i.id === institutionId;
+				}), function( institution) {
+					return _.pick( institution, "role");
+				} );
+				institution.setDataValue( "roles", roles);
 			});
-
-			return userInstitutions;
+			return institutionUsers;
 		})
 		.then( function( institutions){
 			resolve( institutions);

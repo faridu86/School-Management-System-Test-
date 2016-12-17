@@ -16,14 +16,14 @@ global.db = models = {
 	RolePermissions: sequelize.import(__dirname + '/RolePermissions'),
 	Roles: sequelize.import(__dirname + '/Roles'),
 	User: sequelize.import(__dirname + '/User'),
-	UserInstitutions: sequelize.import(__dirname + '/UserInstitutions'),
+	InstitutionUsers: sequelize.import(__dirname + '/InstitutionUsers'),
 	UserLogins: sequelize.import(__dirname + '/UserLogins'),
 	UserPasswords: sequelize.import(__dirname + '/UserPasswords'),
 	UserRequestSignatures: sequelize.import(__dirname + '/UserRequestSignatures'),
 };
 
-models.Institutions.hasMany( models.UserInstitutions, { foreignKey: 'fk_institution_id'});
-models.UserInstitutions.belongsTo( models.Institutions, { foreignKey: 'fk_institution_id'});
+models.Institutions.hasMany( models.InstitutionUsers, { foreignKey: 'fk_institution_id'});
+models.InstitutionUsers.belongsTo( models.Institutions, { foreignKey: 'fk_institution_id'});
 
-models.Roles.hasMany( models.UserInstitutions, { foreignKey: 'fk_role_id'});
-models.UserInstitutions.belongsTo( models.Roles, { foreignKey: 'fk_role_id'});
+models.Roles.hasMany( models.InstitutionUsers, { foreignKey: 'fk_role_id'});
+models.InstitutionUsers.belongsTo( models.Roles, { foreignKey: 'fk_role_id'});

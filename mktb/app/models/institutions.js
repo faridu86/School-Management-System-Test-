@@ -10,8 +10,8 @@ module.exports = function(sequelize, DataTypes) {
         v_address: {type: DataTypes.STRING, allowNull: true},
         v_phone: {type: DataTypes.STRING, allowNull: true},
         fk_tenant_id: {type: DataTypes.INTEGER, allowNull: false},
-        i_created: {type: DataTypes.INTEGER, allowNull: true},
-        i_updated: {type: DataTypes.INTEGER, allowNull: true}
+        created_at: {type: DataTypes.INTEGER, allowNull: true},
+        updated_at: {type: DataTypes.INTEGER, allowNull: true}
     };
 
     var instanceMethods = {};

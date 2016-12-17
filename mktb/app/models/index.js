@@ -9,14 +9,15 @@ var models;
 
 // models
 global.db = models = {
-	Admins: sequelize.import(__dirname + '/Admins'),
+	Admin: sequelize.import(__dirname + '/Admins'),
 	EmailNotifications: sequelize.import(__dirname + '/EmailNotifications'),
 	Institutions: sequelize.import(__dirname + '/Institutions'),
+	InstitutionUsers: sequelize.import(__dirname + '/InstitutionUsers'),
 	Permissions: sequelize.import(__dirname + '/Permissions'),
 	RolePermissions: sequelize.import(__dirname + '/RolePermissions'),
 	Roles: sequelize.import(__dirname + '/Roles'),
+	Tenant: sequelize.import(__dirname + '/Tenant'),
 	User: sequelize.import(__dirname + '/User'),
-	InstitutionUsers: sequelize.import(__dirname + '/InstitutionUsers'),
 	UserLogins: sequelize.import(__dirname + '/UserLogins'),
 	UserPasswords: sequelize.import(__dirname + '/UserPasswords'),
 	UserRequestSignatures: sequelize.import(__dirname + '/UserRequestSignatures'),

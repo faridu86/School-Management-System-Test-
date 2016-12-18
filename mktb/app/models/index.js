@@ -9,6 +9,12 @@ var models;
 
 // models
 global.db = models = {
+	Academic: {
+		Course: sequelize.import(__dirname + '/academic/configuration/course/Course'),		
+		Semester: sequelize.import(__dirname + '/academic/configuration/course/Semester'),
+		SemesterDefaultSubject: sequelize.import(__dirname + '/academic/configuration/course/SemesterDefaultSubject'),
+		Subject: sequelize.import(__dirname + '/academic/configuration/Subject')
+	},
 	Admin: sequelize.import(__dirname + '/Admins'),
 	EmailNotifications: sequelize.import(__dirname + '/EmailNotifications'),
 	Institutions: sequelize.import(__dirname + '/Institutions'),

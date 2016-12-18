@@ -10,7 +10,9 @@ var models;
 // models
 global.db = models = {
 	Academic: {
-		Course: sequelize.import(__dirname + '/academic/configuration/course/Course'),		
+		Batch: sequelize.import(__dirname + '/academic/configuration/Batch/Batch'),
+		BatchSemester: sequelize.import(__dirname + '/academic/configuration/Batch/Semester'),
+		Course: sequelize.import(__dirname + '/academic/configuration/course/Course'),
 		Semester: sequelize.import(__dirname + '/academic/configuration/course/Semester'),
 		SemesterDefaultSubject: sequelize.import(__dirname + '/academic/configuration/course/SemesterDefaultSubject'),
 		Subject: sequelize.import(__dirname + '/academic/configuration/Subject')

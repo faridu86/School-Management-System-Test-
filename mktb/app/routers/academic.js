@@ -40,8 +40,18 @@ subApp.delete("/institutions/:institution_id/courses/:course_id/semesters/:semes
 
 
 
-subApp.get("/institutions/:institution_id/courses/:course_id/batches", controllers.academic.courseConfig.batches);
-subApp.post("/institutions/:institution_id/courses/:course_id/batches", controllers.academic.courseConfig.addBatch);
-subApp.delete("/institutions/:institution_id/courses/:course_id/batches/:batch_id", controllers.academic.courseConfig.deleteBatch);
+subApp.get("/institutions/:institution_id/courses/:course_id/batches", controllers.academic.configuration.batch.batch.getBatches);
+subApp.post("/institutions/:institution_id/courses/:course_id/batches", controllers.academic.configuration.batch.batch.addBatch);
+subApp.get("/institutions/:institution_id/courses/:course_id/batches/:batch_id", controllers.academic.configuration.batch.batch.getBatch);
+subApp.put("/institutions/:institution_id/courses/:course_id/batches/:batch_id", controllers.academic.configuration.batch.batch.editBatch);
+subApp.delete("/institutions/:institution_id/courses/:course_id/batches/:batch_id", controllers.academic.configuration.batch.batch.deleteBatch);
+
+subApp.get("/institutions/:institution_id/courses/:course_id/batches/:batch_id/semesters", controllers.academic.configuration.batch.semester.getSemesters);
+subApp.post("/institutions/:institution_id/courses/:course_id/batches/:batch_id/semesters", controllers.academic.configuration.batch.semester.addSemester);
+subApp.get("/institutions/:institution_id/courses/:course_id/batches/:batch_id/semesters/:semester_id", controllers.academic.configuration.batch.semester.getSemester);
+subApp.put("/institutions/:institution_id/courses/:course_id/batches/:batch_id/semesters/:semester_id", controllers.academic.configuration.batch.semester.editSemester);
+subApp.delete("/institutions/:institution_id/courses/:course_id/batches/:batch_id/semesters/:semester_id", controllers.academic.configuration.batch.semester.deleteSemester);
+
 
 module.exports = subApp;
+

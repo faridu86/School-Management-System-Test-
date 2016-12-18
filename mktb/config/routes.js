@@ -1,9 +1,10 @@
-var path						= require('path')
-	, home						= require('../app/controllers/home')
-	, isAdmin		= require('../middleware/isAdmin')
-	, requireAuthentication		= require('../middleware/requireAuthentication')
-	, loadUserContext			= require('../middleware/loadUserContext')
-	, routers 					= require(path.join(global.config.root, 'app/routers'))
+var path = require('path')
+	, home = require('../app/controllers/home')
+	, isAdmin = require('../middleware/isAdmin')
+	, isTenant = require('../middleware/isTenant')
+	, requireAuthentication	= require('../middleware/requireAuthentication')
+	, loadUserContext	= require('../middleware/loadUserContext')
+	, routers = require(path.join(global.config.root, 'app/routers'))
 	, _ = require('underscore');
 
 require('../app/models');
@@ -33,6 +34,7 @@ module.exports = function (app) {
 	app.post("/reset-password/:signature", home.resetPassword);
 
 	app.use("/dashboard/admin", requireAuthentication, isAdmin, loadUserContext, routers.admin)
+	app.use("/dashboard/tenant", requireAuthentication, isTenant, loadUserContext, routers.tenant)
 	app.use("/dashboard/academic", requireAuthentication, loadUserContext, routers.academic)
 
 }

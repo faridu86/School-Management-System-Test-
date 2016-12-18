@@ -5,5 +5,7 @@ module.exports = function( req, res, next){
     }else {
       res.status(401).send({"message": "You are not an Admin."});
     }
+  }).catch( function(error){
+    res.status(401).send({"message": error});
   })
 };

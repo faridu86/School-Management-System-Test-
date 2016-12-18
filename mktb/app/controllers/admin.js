@@ -1,3 +1,4 @@
+// this controller has admin actions (actions performed by admin).
 var moment  = require('moment');
 
 exports.getTenants = function( req, res) {
@@ -15,6 +16,8 @@ exports.addTenant = function( req, res) {
     v_address: tenant.address,
     v_city: tenant.city,
     v_state: tenant.state,
+    fk_created_by: req.user.id,
+    fk_updated_by: req.user.id,
     created_at: moment().unix(),
     updated_at: moment().unix()
   };
@@ -42,6 +45,7 @@ exports.editTenant = function( req, res) {
     t.v_city = tenant.city;
     t.v_state = tenant.state;
     t.b_active = tenant.is_active;
+    t.fk_updated_by = req.user.id;
     t.updated_at = moment().unix();
     return t.save();
   })
@@ -55,6 +59,7 @@ exports.deleteTenant = function( req, res) {
   .then( function( t){
     t.b_active = false;
     t.b_deleted = true;
+    t.fk_updated_by = req.user.id;
     t.updated_at = moment().unix();
     return t.save();
   })

@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
                 if(!!admin && !!admin.id) {
                     return true;
                 }else {
-                    return false;
+                    throw new Error("You are not an Admin user.")
                 }
             })
         }

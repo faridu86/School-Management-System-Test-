@@ -8,8 +8,8 @@ module.exports = {
     main: "./index.es6"
   },
   output: {
-    path: path.join(__dirname, "../public/"),
-    publicPath: "public/",
+    path: path.join(__dirname, "../public/client"),
+    publicPath: "public/client",
     filename: "[name].js",
     chunkFilename: "[name].js"
   },

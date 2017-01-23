@@ -21,9 +21,13 @@ module.exports = function(sequelize, DataTypes) {
         v_state: DataTypes.STRING,
         v_country: DataTypes.STRING,
         v_mobile: DataTypes.STRING,
-        dob: DataTypes.INTEGER,
+        d_dob: DataTypes.INTEGER,
+        b_active: DataTypes.BOOLEAN,
+        b_deleted: DataTypes.BOOLEAN,
+        fk_created_by: DataTypes.INTEGER,
+        fk_updated_by: DataTypes.INTEGER,
         created_at: DataTypes.INTEGER,
-        updated_at: DataTypes.INTEGER,
+        updated_at: DataTypes.INTEGER
     };
 
     var instanceMethods = {

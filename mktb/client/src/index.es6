@@ -5,14 +5,13 @@ import 'angular-ui-router';
 
 import _ from 'lodash';
 
-import RoutesConfig from './routes.es6';
+import academic from './academic/app.es6';
 
-class mktp {
+class mktpApp {
   constructor() {
     angular
-    .module('mktp', ['academic'])
-    .config(RoutesConfig);
+    .module('mktb', ['academic'])
   }
 }
 
-new mktp
+new mktpApp

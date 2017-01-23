@@ -11,7 +11,7 @@ exports.index = function ( req, res){
 exports.dashboard = function( req, res){
 	var api_key = req.session.api_key?req.session.api_key: req.cookies.mktb_api_key;
 	
-	res.render("home/dashboard", { userContext: req.userContext});
+	res.render("ng-app/view", { userContext: req.userContext});
 }
 
 exports.login = function(req, res){

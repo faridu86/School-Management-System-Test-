@@ -1,8 +1,6 @@
 'use strict';
 class AdminCtrl {
-	constructor() {
-		console.log("hello ng")
-	}
+	constructor() {}
 }
 
 export default AdminCtrl;

@@ -9,8 +9,12 @@ class AdminApp {
     .module('admin', ['ui.router', 'ui.bootstrap'])
     .config(routes)
     .controller('AdminCtrl', controllers.AdminCtrl)
+    .controller('TenantCtrl', controllers.TenantCtrl)
+    .controller('InstitutionCtrl', controllers.InstitutionCtrl)
     .run(($templateCache) => {
       $templateCache.put('./routes/admin.html', require('./routes/admin.html'));
+      $templateCache.put('./routes/tenants/view.html', require('./routes/tenants/view.html'));
+      $templateCache.put('./routes/institutions/view.html', require('./routes/institutions/view.html'));
     });
   }
 }

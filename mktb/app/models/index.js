@@ -36,3 +36,6 @@ models.InstitutionUsers.belongsTo( models.Institutions, { foreignKey: 'fk_instit
 
 models.Roles.hasMany( models.InstitutionUsers, { foreignKey: 'fk_role_id'});
 models.InstitutionUsers.belongsTo( models.Roles, { foreignKey: 'fk_role_id'});
+
+models.User.hasMany( models.Tenant, { foreignKey: 'fk_user_id'});
+models.Tenant.belongsTo( models.User, { foreignKey: 'fk_user_id'});

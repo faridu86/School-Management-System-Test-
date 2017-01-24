@@ -1,14 +1,15 @@
 let Tenant = ($q, $http) => {
   class _Tenant {
-    constructor() {
-      console.log("hello service!")
-    }
     tenants() {
-
-    }
-
-    tenant() {
-
+    	let url = `/dashboard/admin/tenants`;
+    	return $http.get(url)
+	      .then((response) => {
+	      	return response.data;
+	      })
+	      .catch((error) => {
+	      	console.error('error while listing tenants');
+	      	throw error;
+	      });
     }
 
     add() {
@@ -20,7 +21,7 @@ let Tenant = ($q, $http) => {
     }
 
     delete() {
-    
+
     }
   }
   return new _Tenant();

@@ -11,6 +11,7 @@ class AdminApp {
     .controller('AdminCtrl', controllers.AdminCtrl)
     .controller('TenantCtrl', controllers.TenantCtrl)
     .controller('InstitutionCtrl', controllers.InstitutionCtrl)
+    .service('TenantService', services.Tenant)
     .run(($templateCache) => {
       $templateCache.put('./routes/admin.html', require('./routes/admin.html'));
       $templateCache.put('./routes/tenants/view.html', require('./routes/tenants/view.html'));

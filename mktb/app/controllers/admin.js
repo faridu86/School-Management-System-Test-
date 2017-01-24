@@ -2,7 +2,7 @@
 var moment  = require('moment');
 
 exports.getTenants = function( req, res) {
-  global.db.Tenant.findAll()
+  global.db.Tenant.getTenants()
   .then( function( tenants){
     res.json(tenants);
   })
@@ -29,7 +29,14 @@ exports.addTenant = function( req, res) {
 };
 
 exports.getTenant = function( req, res) {
-  global.db.Tenant.find({ where: { id: req.params.tenant_id }})
+  global.db.Tenant.find(
+    { 
+      where: { id: req.params.tenant_id },
+      include: [
+        { model: global.db.User }
+      ]
+    }
+  )
   .then( function( tenant){
     res.json(tenant);
   })

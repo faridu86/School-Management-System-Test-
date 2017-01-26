@@ -1,9 +1,7 @@
 'use strict';
 
-import 'angular';
-import 'angular-ui-router';
-
-import _ from 'lodash';
+import './imports.es6';
+import loadingBarConfig from './config/LoadingBar.es6';
 
 import admin from './admin/app.es6';
 import academic from './academic/app.es6';
@@ -11,7 +9,8 @@ import academic from './academic/app.es6';
 class mktpApp {
   constructor() {
     angular
-    .module('mktb', ['admin', 'academic'])
+    .module('mktb', ['admin', 'academic', 'angular-loading-bar'])
+    .config(loadingBarConfig)
   }
 }
 

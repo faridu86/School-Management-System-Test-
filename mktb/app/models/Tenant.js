@@ -41,7 +41,7 @@ module.exports = function(sequelize, DataTypes) {
             return tenant;
           };
         } else {
-          throw("You are not a tenant user.")
+          return false;
         }
       })
     }

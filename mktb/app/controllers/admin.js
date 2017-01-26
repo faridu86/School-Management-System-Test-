@@ -1,5 +1,6 @@
 // this controller has admin actions (actions performed by admin).
 var moment  = require('moment');
+var _ = require('underscore');
 
 exports.getTenants = function( req, res) {
   global.db.Tenant.getTenants()
@@ -78,8 +79,14 @@ exports.deleteTenant = function( req, res) {
 
 exports.findUser = function( req, res) {
   var email = req.query.email;
-  global.db.User.find({
-    where: { v_email: email}
+  global.db.Tenant.getTenants()
+  .then( function( tenants){
+    var tenantIds = _.map( tenants, function(tenant){
+      return tenant.fk_user_id;
+    })
+    return global.db.User.find({
+      where: ["v_email LIKE ? AND id NOT IN (?)", email, tenantIds]
+    })
   }).then( function(user){
     res.json(user)
   }).catch( function( error) {

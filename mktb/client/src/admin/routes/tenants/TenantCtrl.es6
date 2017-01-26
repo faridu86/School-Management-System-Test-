@@ -51,9 +51,11 @@ let TenantCtrl = (TenantService, $uibModal) => {
 				}
 				findUser() {
 					TenantService.findUser(this.userEmail).then( (user) => {
-						if(user.id) {
+						if(user && user.id) {
 							this.tenant.user = user;
 							this.tenant.fk_user_id = user.id;
+						}else{
+							alert("Either User with Email does not exist, or is already registered as Tenant.")
 						}
 					})
 				}

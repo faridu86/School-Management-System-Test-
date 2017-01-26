@@ -3,7 +3,7 @@ var moment  = require('moment');
 
 exports.getInstitutions = function( req, res){
   global.db.Institutions.findAll({
-    where: { fk_tenant_id: req.tenant.id }
+    where: { fk_tenant_id: req.tenant.id, b_deleted: false }
   })
   .then( function( institutions){
     res.json( institutions);
@@ -23,12 +23,12 @@ exports.addInstitution = function( req, res){
   var institution = req.body.institution;
   var institutionData = {
     fk_tenant_id: req.tenant.id,
-    v_name: institution.name,
-    v_city: institution.city,
-    v_state: institution.state,
-    v_address: institution.address,
-    v_phone: institution.phone,
-    b_active: true,
+    v_name: institution.v_name,
+    v_city: institution.v_city,
+    v_state: institution.v_state,
+    v_address: institution.v_address,
+    v_phone: institution.v_phone,
+    b_active: institution.b_active,
     b_deleted: false,
     fk_created_by: req.user.id,
     fk_updated_by: req.user.id,
@@ -47,12 +47,12 @@ exports.editInstitution = function( req, res){
     where: { fk_tenant_id: req.tenant.id, id: req.params.institution_id }
   })
   .then( function( inst){
-    inst.v_name = institution.name;
-    inst.v_city = institution.city;
-    inst.v_state = institution.state;
-    inst.v_address = institution.address;
-    inst.v_phone = institution.phone;
-    inst.b_active = institution.is_active;
+    inst.v_name = institution.v_name;
+    inst.v_city = institution.v_city;
+    inst.v_state = institution.v_state;
+    inst.v_address = institution.v_address;
+    inst.v_phone = institution.v_phone;
+    inst.b_active = institution.b_active;
     inst.fk_updated_by = req.user.id;
     inst.updated_at = moment().unix();
     return inst.save();

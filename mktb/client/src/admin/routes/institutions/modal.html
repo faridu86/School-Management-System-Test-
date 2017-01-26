@@ -1,0 +1,50 @@
+<div class="modal-header modal-primary">
+	<h3 class="modal-title" id="modal-title">Institution</h3>
+</div>
+<div class="modal-body" id="modal-body">
+	<form class="form-horizontal">
+  	<fieldset>
+  		<div class="form-group">
+			  <label for="v_name" class="col-sm-3 control-label">Name</label>
+		    <div class="col-sm-8">
+		      <input type="text" ng-model="ctrl.institution.v_name" class="form-control" id="v_name" placeholder="Institution Name">
+		    </div>
+		  </div>
+		  <div class="form-group">
+			  <label for="v_phone" class="col-sm-3 control-label">Phone</label>
+		    <div class="col-sm-8">
+		      <input type="text" ng-model="ctrl.institution.v_phone" class="form-control" id="v_phone" placeholder="Phone">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		  	<label for="v_address" class="col-sm-3 control-label">Address</label>
+		    <div class="col-sm-8">
+		      <input type="text" ng-model="ctrl.institution.v_address" class="form-control" id="v_address" placeholder="Address">
+		    </div>
+		  </div>
+		  <div class="form-group">
+			  <label for="v_city" class="col-sm-3 control-label">City</label>
+		    <div class="col-sm-8">
+		      <input type="text" ng-model="ctrl.institution.v_city" class="form-control" id="v_city" placeholder="City">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		  	<label for="v_state" class="col-sm-3 control-label">State</label>
+		    <div class="col-sm-8">
+		      <input type="text" ng-model="ctrl.institution.v_state" class="form-control" id="v_state" placeholder="State">
+		    </div>
+		  </div>
+		  <div class="form-group">
+			  <label for="b_active" class="col-sm-3 control-label">Status</label>
+		    <div class="col-sm-8">
+		      <input type="checkbox" ng-model="ctrl.institution.b_active" ng-checked="!!ctrl.institution.b_active" id="b_active" placeholder="Status"> Tenant is Active
+		    </div>
+		  </div>
+	  </fieldset>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" type="button" ng-click="ctrl.save()">Save</button>
+	<button class="btn btn-danger" type="button" ng-click="ctrl.delete()">Delete</button>
+	<button class="btn btn-warning" type="button" ng-click="ctrl.close()">Cancel</button>
+</div>

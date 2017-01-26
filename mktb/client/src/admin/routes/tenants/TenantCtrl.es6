@@ -1,23 +1,77 @@
 'use strict';
-let TenantCtrl = (TenantService) => {
+let TenantCtrl = (TenantService, $uibModal) => {
 	class TenantCtrl {
 		tenants;
 		constructor() {
+			this.list();
+		}
+		list() {
 			TenantService.tenants().then( ( tenants)=> {
 				this.tenants = tenants;
 			})
 		}
-		tenant(id) {
-			console.log(id)
-		}
-		add() {
-			console.log("add")
-		}
-		update(id) {
-			console.log("update")
-		}
-		delete(id) {
-			console.log("delete")
+		tenant(tenant) {
+			let self = this;
+
+			class TenantModal {
+				tenant;
+				user;
+				userEmail;
+				constructor($uibModalInstance, tenant) {
+					this.tenant = _.extend({}, tenant)
+					if(this.tenant.id) {
+						this.userEmail = this.tenant.user.v_email;
+					}
+					this.$uibModalInstance = $uibModalInstance;
+				}
+				save() {
+					if(!tenant.id) {
+						TenantService.add(this.tenant).then( (tenant) => {
+							this.tenant.id = tenant.id;
+							this.close();
+							self.list();
+						});
+					}else{
+						TenantService.update(this.tenant).then( (tenant) => {
+							this.close();
+							self.list();
+						});
+					}
+				}
+				delete() {
+					if (confirm("Are you sure? you want to delete the Tenant?") ) {
+						TenantService.delete(this.tenant).then( (tenant) => {
+							this.close();
+							self.list();
+						});
+					}
+				}
+				close() {
+					this.$uibModalInstance.dismiss('cancel');
+				}
+				findUser() {
+					TenantService.findUser(this.userEmail).then( (user) => {
+						if(user.id) {
+							this.tenant.user = user;
+							this.tenant.fk_user_id = user.id;
+						}
+					})
+				}
+			}
+
+			let tenantViewModal = $uibModal.open({
+				controller: TenantModal,
+				controllerAs: 'ctrl',
+				bindToController: true,
+				windowClass: 'modal-tenant-view',
+				templateUrl: './routes/tenants/modal.html',
+				resolve: {
+					tenant: () => { return tenant; }
+				}
+			});
+			
+			tenantViewModal.result.finally(function(){});
+
 		}
 	}
 	return new TenantCtrl;

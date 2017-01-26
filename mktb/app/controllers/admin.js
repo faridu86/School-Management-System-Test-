@@ -11,11 +11,12 @@ exports.getTenants = function( req, res) {
 exports.addTenant = function( req, res) {
   var tenant = req.body.tenant;
   var tenantData = {
-    fk_user_id: tenant.user_id,
-    v_name: tenant.name,
-    v_address: tenant.address,
-    v_city: tenant.city,
-    v_state: tenant.state,
+    fk_user_id: tenant.fk_user_id,
+    v_name: tenant.v_name,
+    v_address: tenant.v_address,
+    v_city: tenant.v_city,
+    v_state: tenant.v_state,
+    b_active: tenant.b_active,
     fk_created_by: req.user.id,
     fk_updated_by: req.user.id,
     created_at: moment().unix(),
@@ -46,12 +47,12 @@ exports.editTenant = function( req, res) {
   var tenant = req.body.tenant;
   global.db.Tenant.find({ where: { id: req.params.tenant_id }})
   .then( function( t){
-    t.fk_user_id = tenant.user_id;
-    t.v_name = tenant.name;
-    t.v_address = tenant.address;
-    t.v_city = tenant.city;
-    t.v_state = tenant.state;
-    t.b_active = tenant.is_active;
+    t.fk_user_id = tenant.fk_user_id;
+    t.v_name = tenant.v_name;
+    t.v_address = tenant.v_address;
+    t.v_city = tenant.v_city;
+    t.v_state = tenant.v_state;
+    t.b_active = tenant.b_active;
     t.fk_updated_by = req.user.id;
     t.updated_at = moment().unix();
     return t.save();
@@ -72,5 +73,16 @@ exports.deleteTenant = function( req, res) {
   })
   .then( function( tenant){
     res.json(tenant);
+  })
+};
+
+exports.findUser = function( req, res) {
+  var email = req.query.email;
+  global.db.User.find({
+    where: { v_email: email}
+  }).then( function(user){
+    res.json(user)
+  }).catch( function( error) {
+    res.send(error)
   })
 };

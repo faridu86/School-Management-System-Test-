@@ -1,6 +1,6 @@
 <div class="form-group">
-	<button class="btn btn-primary" ng-click="tenantCtrl.add()">
-		<i class="glyphicon glyphicon-plus"></i> Add Tenant
+	<button class="btn btn-primary" ng-click="tenantCtrl.tenant({})">
+		<i class="glyphicon glyphicon-plus"></i> Add Institution
 	</button>
 </div>
 
@@ -24,11 +24,8 @@
 		<td>{{tenant.v_city}}</td>
 		<td>{{tenant.v_state}}</td>
 		<td class="text-right">
-			<button class="btn btn-sm btn-primary" ng-click="tenantCtrl.tenant(tenant.id)">
-				<i class="glyphicon glyphicon-edit"></i>
-			</button>
-			<button class="btn btn-sm btn-danger" ng-click="tenantCtrl.delete(tenant.id)">
-				<i class="glyphicon glyphicon-trash"></i>
+			<button class="btn btn-sm btn-primary" ng-click="tenantCtrl.tenant(tenant)">
+				<i class="glyphicon glyphicon-eye-open"></i>
 			</button>
 		</td>
 	</tr>

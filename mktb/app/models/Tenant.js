@@ -22,6 +22,7 @@ module.exports = function(sequelize, DataTypes) {
   var classMethods = {
     getTenants: function() {
       return this.findAll({
+        where: { b_deleted: false },
         include: [
           { model: global.db.User }
         ]

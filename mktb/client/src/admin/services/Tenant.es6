@@ -1,5 +1,5 @@
 let Tenant = ($q, $http) => {
-  class _Tenant {
+  class Tenant {
     tenants() {
     	let url = `/dashboard/admin/tenants`;
     	return $http.get(url)
@@ -60,7 +60,7 @@ let Tenant = ($q, $http) => {
         });
     }
   }
-  return new _Tenant();
+  return new Tenant();
 };
 
 export default Tenant;

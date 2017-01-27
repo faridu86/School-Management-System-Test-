@@ -20,7 +20,7 @@ let config = /*@ngInject*/ ($stateProvider, $sceProvider, $urlRouterProvider) =>
   .state('admin.institutions', {
     url: '/institutions',
     templateUrl: './routes/institutions/view.html',
-    controller: 'InstitutionCtrl',
+    controller: 'TenantInstitutionCtrl',
     controllerAs: 'institutionCtrl',
   });
 

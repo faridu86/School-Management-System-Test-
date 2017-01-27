@@ -8,9 +8,12 @@ class AcademicApp {
   	angular
     .module('academic', ['ui.router', 'ui.bootstrap'])
     .config(routes)
-    .controller('AcademicCtrl', controllers.AcademicCtrl)
+    .controller('InstitutionsCtrl', controllers.InstitutionsCtrl)
+    .controller('InstitutionCtrl', controllers.InstitutionCtrl)
+    .service('InstitutionService', services.Institution)
     .run(($templateCache) => {
-      $templateCache.put('./routes/academic.html', require('./routes/academic.html'));
+      $templateCache.put('./routes/institutions.html', require('./routes/institutions.html'));
+      $templateCache.put('./routes/institution/institution.html', require('./routes/institution/institution.html'));
     });
   }
 }

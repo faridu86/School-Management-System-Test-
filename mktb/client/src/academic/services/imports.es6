@@ -1,2 +1,3 @@
+import Institution from './Institution.es6';
 
-export default {};
+export default { Institution };

@@ -5,11 +5,17 @@ let config = /*@ngInject*/ ($stateProvider, $sceProvider, $urlRouterProvider) =>
   
   /** Medications routes **/
   $stateProvider
-  .state('academic', {
-    url: '/academic',
-    templateUrl: './routes/academic.html',
-    controller: 'AcademicCtrl',
-    controllerAs: 'academicCtrl',
+  .state('institutions', {
+    url: '/institutions',
+    templateUrl: './routes/institutions.html',
+    controller: 'InstitutionsCtrl',
+    controllerAs: 'ctrl',
+  })
+  .state('institution', {
+    url: '/institution/:institution_id',
+    templateUrl: './routes/institution/institution.html',
+    controller: 'InstitutionCtrl',
+    controllerAs: 'ctrl',
   });
 
   $urlRouterProvider.otherwise('/');

@@ -10,7 +10,7 @@ class AdminApp {
     .config(routes)
     .controller('AdminCtrl', controllers.AdminCtrl)
     .controller('TenantCtrl', controllers.TenantCtrl)
-    .controller('InstitutionCtrl', controllers.InstitutionCtrl)
+    .controller('TenantInstitutionCtrl', controllers.InstitutionCtrl)
     .service('TenantService', services.Tenant)
     .service('TenantInstitutionService', services.Institution)
     .run(($templateCache) => {

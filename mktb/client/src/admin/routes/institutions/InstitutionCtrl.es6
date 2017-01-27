@@ -1,5 +1,5 @@
 'use strict';
-let InstitutionCtrl = (TenantInstitutionService, $uibModal) => {
+let InstitutionCtrl = (TenantInstitutionService, $uibModal, Notification) => {
 	class InstitutionCtrl {
 		institutions;
 		constructor() {
@@ -25,11 +25,13 @@ let InstitutionCtrl = (TenantInstitutionService, $uibModal) => {
 							this.institution.id = institution.id;
 							this.close();
 							self.list();
+							Notification.success('Added Institution!');
 						});
 					}else{
 						TenantInstitutionService.update(this.institution).then( (institution) => {
 							this.close();
 							self.list();
+							Notification.success('Updated Institution!');
 						});
 					}
 				}
@@ -38,6 +40,7 @@ let InstitutionCtrl = (TenantInstitutionService, $uibModal) => {
 						TenantInstitutionService.delete(this.institution).then( (institution) => {
 							this.close();
 							self.list();
+							Notification.success('Deleted Institution!');
 						});
 					}
 				}

@@ -1,5 +1,5 @@
 'use strict';
-let TenantCtrl = (TenantService, $uibModal) => {
+let TenantCtrl = (TenantService, $uibModal, Notification) => {
 	class TenantCtrl {
 		tenants;
 		constructor() {
@@ -30,11 +30,13 @@ let TenantCtrl = (TenantService, $uibModal) => {
 							this.tenant.id = tenant.id;
 							this.close();
 							self.list();
+							Notification.success('Added Tenant!');
 						});
 					}else{
 						TenantService.update(this.tenant).then( (tenant) => {
 							this.close();
 							self.list();
+							Notification.success('Updated Tenant!');
 						});
 					}
 				}
@@ -43,6 +45,7 @@ let TenantCtrl = (TenantService, $uibModal) => {
 						TenantService.delete(this.tenant).then( (tenant) => {
 							this.close();
 							self.list();
+							Notification.success('Deleted Tenant!');
 						});
 					}
 				}

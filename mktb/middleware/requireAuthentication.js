@@ -24,6 +24,7 @@ module.exports = function( req, res, next){
   if ( apiKey){
 		authentication.isLoggedIn( apiKey).then( function( user){
       if(!!user && !!user.id){
+        user.setDataValue("v_password", null);
 				req.user = user;
 				res.locals.currentUser = req.user;
 				next();

@@ -7,6 +7,8 @@ var subApp = express();
 
 subApp.set('views', path.join(global.config.root, 'app/views'));
 
+subApp.get("/institutions/", controllers.academic.institutions.index);
+
 subApp.get("/institutions/:institution_id", controllers.academic.dashboard.index);
 
 subApp.get("/institutions/:institution_id/students", controllers.academic.students.index);

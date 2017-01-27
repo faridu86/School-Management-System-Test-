@@ -7,7 +7,12 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>School System</title>
 
-
+    <script type="text/javascript">
+      window.App = {
+        currentUser: <%- JSON.stringify(user) %>,
+        userContext: <%- JSON.stringify(userContext) %>
+      }
+    </script>
     <%- css("home/index") %>
 
     <%- js("js/home/index") %>

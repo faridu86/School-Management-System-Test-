@@ -3,6 +3,8 @@ import 'angular-ui-router';
 
 import _ from 'lodash';
 
+import './css/style.scss';
+
 import 'angular-ui-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

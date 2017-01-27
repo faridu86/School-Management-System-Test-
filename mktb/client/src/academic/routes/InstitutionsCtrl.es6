@@ -6,6 +6,7 @@ let InstitutionsCtrl = (InstitutionService) => {
 			this.list();
 		}
 		list(){
+			this.institutions = InstitutionService.institutions;
 			InstitutionService.list().then( (institutions) => {
 				this.institutions = institutions;
 			})

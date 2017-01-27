@@ -1,4 +1,4 @@
-let Institution = ($q, $http) => {
+let Institution = ($http) => {
   class Institution {
   	list() {
   		let url = `/dashboard/tenant/institutions`;

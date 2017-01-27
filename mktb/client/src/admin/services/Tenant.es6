@@ -1,4 +1,4 @@
-let Tenant = ($q, $http) => {
+let Tenant = ($http) => {
   class Tenant {
     tenants() {
     	let url = `/dashboard/admin/tenants`;

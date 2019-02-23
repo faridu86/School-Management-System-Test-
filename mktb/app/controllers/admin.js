@@ -1,8 +1,9 @@
 // this controller has admin actions (actions performed by admin).
 var moment  = require('moment');
+var _ = require('underscore');
 
 exports.getTenants = function( req, res) {
-  global.db.Tenant.findAll()
+  global.db.Tenant.getTenants()
   .then( function( tenants){
     res.json(tenants);
   })
@@ -11,11 +12,12 @@ exports.getTenants = function( req, res) {
 exports.addTenant = function( req, res) {
   var tenant = req.body.tenant;
   var tenantData = {
-    fk_user_id: tenant.user_id,
-    v_name: tenant.name,
-    v_address: tenant.address,
-    v_city: tenant.city,
-    v_state: tenant.state,
+    fk_user_id: tenant.fk_user_id,
+    v_name: tenant.v_name,
+    v_address: tenant.v_address,
+    v_city: tenant.v_city,
+    v_state: tenant.v_state,
+    b_active: tenant.b_active,
     fk_created_by: req.user.id,
     fk_updated_by: req.user.id,
     created_at: moment().unix(),
@@ -29,7 +31,14 @@ exports.addTenant = function( req, res) {
 };
 
 exports.getTenant = function( req, res) {
-  global.db.Tenant.find({ where: { id: req.params.tenant_id }})
+  global.db.Tenant.find(
+    { 
+      where: { id: req.params.tenant_id },
+      include: [
+        { model: global.db.User }
+      ]
+    }
+  )
   .then( function( tenant){
     res.json(tenant);
   })
@@ -39,12 +48,12 @@ exports.editTenant = function( req, res) {
   var tenant = req.body.tenant;
   global.db.Tenant.find({ where: { id: req.params.tenant_id }})
   .then( function( t){
-    t.fk_user_id = tenant.user_id;
-    t.v_name = tenant.name;
-    t.v_address = tenant.address;
-    t.v_city = tenant.city;
-    t.v_state = tenant.state;
-    t.b_active = tenant.is_active;
+    t.fk_user_id = tenant.fk_user_id;
+    t.v_name = tenant.v_name;
+    t.v_address = tenant.v_address;
+    t.v_city = tenant.v_city;
+    t.v_state = tenant.v_state;
+    t.b_active = tenant.b_active;
     t.fk_updated_by = req.user.id;
     t.updated_at = moment().unix();
     return t.save();
@@ -65,5 +74,22 @@ exports.deleteTenant = function( req, res) {
   })
   .then( function( tenant){
     res.json(tenant);
+  })
+};
+
+exports.findUser = function( req, res) {
+  var email = req.query.email;
+  global.db.Tenant.getTenants()
+  .then( function( tenants){
+    var tenantIds = _.map( tenants, function(tenant){
+      return tenant.fk_user_id;
+    })
+    return global.db.User.find({
+      where: ["v_email LIKE ? AND id NOT IN (?)", email, tenantIds]
+    })
+  }).then( function(user){
+    res.json(user)
+  }).catch( function( error) {
+    res.send(error)
   })
 };

@@ -1,5 +1,3 @@
-import 'angular-ui-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import components from './components/imports.es6';
 import controllers from './routes/imports.es6';;

@@ -12,10 +12,10 @@ require('../app/models');
 module.exports = function (app) {
 
 	app.use(function (req, res, next) {
-    res.locals._ = _;
-    app.locals.domainforCookies = global.config.domainForCookie;
-    app.locals.baseUrl = global.config.baseUrl;
-    next();
+	    res.locals._ = _;
+	    app.locals.domainforCookies = global.config.domainForCookie;
+	    app.locals.baseUrl = global.config.baseUrl;
+	    next();
 	});
 
 	app.get("/", home.index);

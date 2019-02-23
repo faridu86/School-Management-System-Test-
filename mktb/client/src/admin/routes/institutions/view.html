@@ -1,0 +1,30 @@
+<div class="form-group">
+	<button class="btn btn-primary" ng-click="institutionCtrl.institution({})">
+		<i class="glyphicon glyphicon-plus"></i> Add Institution
+	</button>
+</div>
+
+<table class="table table-striped">
+	<tr>
+		<th>Name</th>
+		<th>Phone</th>
+		<th>Address</th>
+		<th>City</th>
+		<th>State/Prov.</th>
+		<th>Status</th>
+		<th class="text-right">Actions</th>
+	</tr>
+	<tr ng-repeat="institution in institutionCtrl.institutions">
+		<td>{{institution.v_name}}</td>
+		<td>{{institution.v_phone}}</td>
+		<td>{{institution.v_address}}</td>
+		<td>{{institution.v_city}}</td>
+		<td>{{institution.v_state}}</td>
+		<td>{{institution.b_active?"Active":"Not Active"}}</td>
+		<td class="text-right">
+			<button class="btn btn-sm btn-primary" ng-click="institutionCtrl.institution(institution)">
+				<i class="glyphicon glyphicon-eye-open"></i>
+			</button>
+		</td>
+	</tr>
+</table>

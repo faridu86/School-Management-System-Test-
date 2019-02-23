@@ -1,0 +1,20 @@
+
+<div class="col-sm-4"  ng-repeat="institution in ctrl.institutions">
+	<div class="panel panel-default">
+		<div class="panel-heading clearfix">
+			<div class="panel-title pull-left">
+				<i class="glyphicon glyphicon-education"></i> {{institution.v_name}}
+			</div>
+			<a class="pull-right" ui-sref="institution({institution_id: institution.id})">
+				<i class="glyphicon glyphicon-menu-right"></i>
+			</a>
+		</div>
+		<div class="panel-body">
+			<div>{{institution.v_address}}</div>
+			<div>{{institution.v_city}}, {{institution.v_state}}</div>
+		</div>
+		<div class="panel-footer">
+			<i class="glyphicon glyphicon-phone-alt"></i> {{institution.v_phone}}
+		</div>
+	</div>
+</div>

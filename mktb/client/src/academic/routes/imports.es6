@@ -1,2 +1,7 @@
-import AcademicCtrl from "./AcademicCtrl.es6";
-export default { AcademicCtrl };
+import InstitutionsCtrl from "./InstitutionsCtrl.es6";
+import InstitutionCtrl from "./institution/InstitutionCtrl.es6";
+
+export default { 
+	InstitutionsCtrl, 
+	InstitutionCtrl 
+};

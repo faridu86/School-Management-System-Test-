@@ -10,8 +10,15 @@ exports.index = function ( req, res){
 
 exports.dashboard = function( req, res){
 	var api_key = req.session.api_key?req.session.api_key: req.cookies.mktb_api_key;
-	
-	res.render("ng-app/view", { userContext: req.userContext});
+	global.db.Admin.isAdmin( req.user)
+	.then( function(isAdmin){
+		res.locals.isAdmin = isAdmin;
+		return global.db.Tenant.getTenant( req.user)
+	})
+	.then( function(tenant){
+		res.locals.isTenant = (!!tenant && !!tenant.id);
+		res.render("ng-app/view", { user: req.user, userContext: req.userContext});
+	});
 }
 
 exports.login = function(req, res){

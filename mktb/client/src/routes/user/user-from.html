@@ -1,0 +1,76 @@
+<fieldset>
+	<legend>User Information</legend>
+	<div class="form-group">
+		<label for="v_first_name" class="col-sm-2 control-label">First Name</label>
+		<div class="col-sm-4">
+			<input type="text" ng-model="ctrl.tenant.user.v_first_name" class="form-control" id="v_first_name" placeholder="First Name">
+		</div>
+	  <label for="v_last_name" class="col-sm-2 control-label">Last Name</label>
+    <div class="col-sm-4">
+      <input type="text" ng-model="ctrl.tenant.user.v_last_name" class="form-control" id="v_last_name" placeholder="Last Name">
+    </div>
+  </div>
+  <div class="form-group">
+	  <label for="v_email" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-4">
+      <input type="email" ng-model="ctrl.tenant.user.v_email" class="form-control" id="v_email" placeholder="Email">
+    </div>
+  	<label for="v_mobile" class="col-sm-2 control-label">Mobile</label>
+		<div class="col-sm-4">
+			<input type="text" ng-model="ctrl.tenant.user.v_mobile" class="form-control" id="v_mobile" placeholder="Mobile">
+		</div>
+  </div>
+	<div class="form-group">
+	  <label for="v_username" class="col-sm-2 control-label">Username</label>
+    <div class="col-sm-4">
+      <input type="text" ng-model="ctrl.tenant.user.v_username" class="form-control" id="v_username" placeholder="Username">
+    </div>
+  	<label for="v_password" class="col-sm-2 control-label">Password</label>
+		<div class="col-sm-4">
+			<input type="password" ng-model="ctrl.tenant.user.v_p" class="form-control" id="v_password" placeholder="Password">
+		</div>
+  </div>
+  <div class="form-group">
+  	<label for="v_nic_number" class="col-sm-2 control-label">NIC#</label>
+		<div class="col-sm-4">
+			<input type="text" ng-model="ctrl.tenant.user.v_nic_number" class="form-control" id="v_nic_number" placeholder="NIC Number">
+		</div>
+	  <label for="v_gender" class="col-sm-2 control-label">Gender</label>
+		<div class="col-sm-4">
+			<select class="form-control" ng-model="ctrl.tenant.user.v_gender" id="v_gender" placeholder="Gender">
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
+			</select>
+		</div>
+  </div>
+  <div class="form-group">
+	  <label for="v_nationaliy" class="col-sm-2 control-label">Nationaliy</label>
+    <div class="col-sm-4">
+      <input type="text" ng-model="ctrl.tenant.user.v_nationaliy" class="form-control" id="v_nationaliy" placeholder="Nationaliy">
+    </div>
+  	<label for="v_city" class="col-sm-2 control-label">City</label>
+    <div class="col-sm-4">
+      <input type="text" ng-model="ctrl.tenant.user.v_city" class="form-control" id="v_city" placeholder="City">
+    </div>
+  </div>
+  <div class="form-group">
+	  <label for="v_state" class="col-sm-2 control-label">State</label>
+    <div class="col-sm-4">
+      <input type="text" ng-model="ctrl.tenant.user.v_state" class="form-control" id="v_state" placeholder="State">
+    </div>
+  	<label for="v_country" class="col-sm-2 control-label">Country</label>
+    <div class="col-sm-4">
+      <input type="text" ng-model="ctrl.tenant.user.v_country" class="form-control" id="v_country" placeholder="Country">
+    </div>
+  </div>
+  <div class="form-group">
+	  <label for="d_dob" class="col-sm-2 control-label">DOB</label>
+    <div class="col-sm-4">
+      <input type="text" ng-model="ctrl.tenant.user.d_dob" class="form-control" id="d_dob" placeholder="DOB">
+    </div>
+  	<label for="b_active" class="col-sm-2 control-label">Status</label>
+    <div class="col-sm-4">
+      <input type="checkbox" ng-model="ctrl.tenant.user.b_active" ng-checked="ctrl.tenant.user.b_active" id="b_active" placeholder="Status"> User is Active
+    </div>
+  </div>
+</fieldset>

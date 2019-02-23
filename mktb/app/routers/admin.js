@@ -12,6 +12,7 @@ subApp.get('/', function( req, res) {
   res.send("admin")
 });
 subApp.get('/tenants', controllers.admin.getTenants);
+subApp.get('/tenants/find-user', controllers.admin.findUser);
 subApp.post('/tenants', controllers.admin.addTenant);
 subApp.get('/tenants/:tenant_id', controllers.admin.getTenant);
 subApp.put('/tenants/:tenant_id', controllers.admin.editTenant);

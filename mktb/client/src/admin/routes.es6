@@ -10,6 +10,18 @@ let config = /*@ngInject*/ ($stateProvider, $sceProvider, $urlRouterProvider) =>
     templateUrl: './routes/admin.html',
     controller: 'AdminCtrl',
     controllerAs: 'adminCtrl',
+  })
+  .state('admin.tenants', {
+    url: '/tenants',
+    templateUrl: './routes/tenants/view.html',
+    controller: 'TenantCtrl',
+    controllerAs: 'tenantCtrl',
+  })
+  .state('admin.institutions', {
+    url: '/institutions',
+    templateUrl: './routes/institutions/view.html',
+    controller: 'TenantInstitutionCtrl',
+    controllerAs: 'institutionCtrl',
   });
 
   $urlRouterProvider.otherwise('/');

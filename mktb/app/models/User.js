@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     var tableName = "users";
 
     var attributes = {
-        id: DataTypes.INTEGER,
+        id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
         v_username: DataTypes.STRING,
         v_password: DataTypes.STRING,
         v_email: DataTypes.STRING,

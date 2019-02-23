@@ -1,0 +1,32 @@
+<div class="form-group">
+	<button class="btn btn-primary" ng-click="tenantCtrl.tenant({})">
+		<i class="glyphicon glyphicon-plus"></i> Add Tenant
+	</button>
+</div>
+
+<table class="table table-striped">
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Mobile</th>
+		<th>Institution</th>
+		<th>Address</th>
+		<th>City</th>
+		<th>State/Prov.</th>
+		<th class="text-right">Actions</th>
+	</tr>
+	<tr ng-repeat="tenant in tenantCtrl.tenants">
+		<td>{{tenant.user.v_first_name}} {{tenant.user.v_last_name}}</td>
+		<td>{{tenant.user.v_email}}</td>
+		<td>{{tenant.user.v_mobile}}</td>
+		<td>{{tenant.v_name}}</td>
+		<td>{{tenant.v_address}}</td>
+		<td>{{tenant.v_city}}</td>
+		<td>{{tenant.v_state}}</td>
+		<td class="text-right">
+			<button class="btn btn-sm btn-primary" ng-click="tenantCtrl.tenant(tenant)">
+				<i class="glyphicon glyphicon-eye-open"></i>
+			</button>
+		</td>
+	</tr>
+</table>
